@@ -12,4 +12,8 @@ val Black = Color(0xFF000000)
 val DarkGray = Color(0xFF121212)  // Un gris très foncé proche du noir
 val MediumDarkGray = Color(0xFF2C2C2C) // Un gris foncé un peu plus clair
 val MediumDarkGrey = Color(0xFF4A4A4A)  // exemple, tu peux ajuster le code hexadécimal
+
+
 val LightMediumGray = Color(0xFF7A7A7A)
+
+
