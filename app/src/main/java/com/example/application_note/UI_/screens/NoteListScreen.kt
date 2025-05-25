@@ -15,34 +15,67 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material.icons.filled.Edit
+import com.example.application_note.ui.theme.BlueDark
+import com.example.application_note.ui.theme.White
+import com.example.application_note.ui.theme.YellowLight
+import com.example.application_note.ui.theme.BackgroundLight
+import androidx.compose.foundation.background
+
+
+
 
 @Composable
 fun NoteListScreen(
     viewModel: NoteViewModel = viewModel(),
-    onAddClick: () -> Unit
+    onAddClick: () -> Unit,
+    onEditClick: (Note) -> Unit
 ) {
     val notes by viewModel.notes.observeAsState(emptyList())
-
     var noteToDelete by remember { mutableStateOf<Note?>(null) }
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddClick) {
-                Text("+")
+            FloatingActionButton(
+                onClick = onAddClick,
+                containerColor = BlueDark,
+                contentColor = White
+            ) {
+                Text("+", style = MaterialTheme.typography.headlineMedium)
             }
-        }
+        },
+        containerColor = BackgroundLight // fond général clair
     ) { paddingValues ->
-        LazyColumn(
+
+        Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            items(notes.size) { i ->
-                val note = notes[i]
-                NoteItem(
-                    note = note,
-                    onDeleteClick = { noteToDelete = note }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(BlueDark)
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = "Notes",
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = White
                 )
+            }
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(notes.size) { i ->
+                    val note = notes[i]
+                    NoteItem(
+                        note = note,
+                        onDeleteClick = { noteToDelete = note },
+                        onEditClick = { onEditClick(note) }
+                    )
+                }
             }
         }
     }
@@ -71,8 +104,14 @@ fun NoteListScreen(
     }
 }
 
+
+
 @Composable
-fun NoteItem(note: Note, onDeleteClick: () -> Unit) {
+fun NoteItem(
+    note: Note,
+    onDeleteClick: () -> Unit,
+    onEditClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -80,7 +119,9 @@ fun NoteItem(note: Note, onDeleteClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(modifier = Modifier.weight(1f)) {
@@ -88,11 +129,20 @@ fun NoteItem(note: Note, onDeleteClick: () -> Unit) {
                 Spacer(Modifier.height(4.dp))
                 Text(note.content, style = MaterialTheme.typography.bodyMedium)
             }
-            IconButton(onClick = onDeleteClick) {
-                Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = "Supprimer la note"
-                )
+
+            Row {
+                IconButton(onClick = onEditClick) {
+                    Icon(
+                        imageVector = Icons.Default.Edit, // Icône édition
+                        contentDescription = "Modifier la note"
+                    )
+                }
+                IconButton(onClick = onDeleteClick) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Supprimer la note"
+                    )
+                }
             }
         }
     }

@@ -5,20 +5,21 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.application_note.ui.NoteViewModel
+import com.example.application_note.data.Note
 
 @Composable
 fun AddEditNoteScreen(
-    viewModel: NoteViewModel = viewModel(),
-    onSave: () -> Unit
+    note: Note? = null,
+    onSave: (Note) -> Unit
 ) {
-    var title by remember { mutableStateOf("") }
-    var content by remember { mutableStateOf("") }
+    var title by remember { mutableStateOf(note?.title ?: "") }
+    var content by remember { mutableStateOf(note?.content ?: "") }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
 
         OutlinedTextField(
             value = title,
@@ -33,15 +34,17 @@ fun AddEditNoteScreen(
             value = content,
             onValueChange = { content = it },
             label = { Text("Contenu") },
-            modifier = Modifier.fillMaxWidth().height(150.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {
             if (title.isNotBlank() && content.isNotBlank()) {
-                viewModel.addNote(title, content)
-                onSave()
+                val newNote = note?.copy(title = title, content = content) ?: Note(title = title, content = content)
+                onSave(newNote)
             }
         }) {
             Text("Enregistrer")
