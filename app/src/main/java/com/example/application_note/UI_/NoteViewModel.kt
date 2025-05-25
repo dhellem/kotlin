@@ -8,13 +8,13 @@ import com.example.application_note.data.NoteRepository
 import kotlinx.coroutines.launch
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: NoteRepository
+    private val repository: NoteRepository //permet d'interagir avec room(add,delet,update)
     val notes: LiveData<List<Note>>
 
     init {
-        val dao = NoteDatabase.getDatabase(application).noteDao()
+        val dao = NoteDatabase.getDatabase(application).noteDao()//recupere le note dans la db
         repository = NoteRepository(dao)
-        notes = repository.notes.asLiveData()
+        notes = repository.notes.asLiveData()//transforme la liste de note pour que Compose les observe automatiquement
     }
 
     fun addNote(title: String, content: String) = viewModelScope.launch {

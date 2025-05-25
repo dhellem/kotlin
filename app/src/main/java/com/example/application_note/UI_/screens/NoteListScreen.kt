@@ -1,28 +1,32 @@
 package com.example.application_note.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.application_note.ui.NoteViewModel
 import com.example.application_note.data.Note
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.foundation.clickable
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material.icons.filled.Edit
 import com.example.application_note.ui.theme.BlueDark
 import com.example.application_note.ui.theme.White
-import com.example.application_note.ui.theme.YellowLight
-import com.example.application_note.ui.theme.BackgroundLight
-import androidx.compose.foundation.background
-
-
+import com.example.application_note.ui.theme.Yellow
+import com.example.application_note.ui.theme.Black
+import com.example.application_note.ui.theme.DarkGray
+import com.example.application_note.ui.theme.MediumDarkGray
+import com.example.application_note.ui.theme.LightMediumGray
+import androidx.compose.foundation.border
+import com.example.application_note.ui.theme.MediumDarkGrey
+import androidx.compose.ui.text.font.FontWeight
 
 
 @Composable
@@ -38,33 +42,36 @@ fun NoteListScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onAddClick,
-                containerColor = BlueDark,
-                contentColor = White
+
+                containerColor = Yellow,
+                contentColor = Black
             ) {
-                Text("+", style = MaterialTheme.typography.headlineMedium)
+                Text("+",     style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),)
+
             }
         },
-        containerColor = BackgroundLight // fond général clair
+        containerColor = DarkGray // <-- Fond général noir ici
     ) { paddingValues ->
 
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
+                .background (DarkGray) // Assure que la colonne a aussi un fond noir
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(BlueDark)
+                    .background(Yellow)
                     .padding(16.dp)
             ) {
                 Text(
                     text = "Notes",
-                    style = MaterialTheme.typography.headlineLarge,
-                    color = White
+                    style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+                    color = Black
                 )
             }
-
+            Spacer(modifier = Modifier.height(16.dp))
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -104,8 +111,6 @@ fun NoteListScreen(
     }
 }
 
-
-
 @Composable
 fun NoteItem(
     note: Note,
@@ -115,8 +120,12 @@ fun NoteItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+            .padding(4.dp)
+            .border(width = 2.dp, color = DarkGray, shape = MaterialTheme.shapes.medium), // BORDURE BLANCHE
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MediumDarkGrey // Fond gris foncé de la carte
+        )
     ) {
         Row(
             modifier = Modifier
@@ -133,7 +142,7 @@ fun NoteItem(
             Row {
                 IconButton(onClick = onEditClick) {
                     Icon(
-                        imageVector = Icons.Default.Edit, // Icône édition
+                        imageVector = Icons.Default.Edit,
                         contentDescription = "Modifier la note"
                     )
                 }

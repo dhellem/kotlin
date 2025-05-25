@@ -9,9 +9,10 @@ import com.example.application_note.data.Note
 
 @Composable
 fun AddEditNoteScreen(
-    note: Note? = null,
-    onSave: (Note) -> Unit
+    note: Note? = null,// si il n'y a pas de note on est en mode "ajout" sinon en mode "modifier"
+    onSave: (Note) -> Unit//callback
 ) {
+    //declare deux etats locaux avec des valeur initial ou non en fonction du mode
     var title by remember { mutableStateOf(note?.title ?: "") }
     var content by remember { mutableStateOf(note?.content ?: "") }
 
@@ -20,7 +21,7 @@ fun AddEditNoteScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-
+//paragraphe pour le titre
         OutlinedTextField(
             value = title,
             onValueChange = { title = it },
@@ -29,7 +30,7 @@ fun AddEditNoteScreen(
         )
 
         Spacer(modifier = Modifier.height(8.dp))
-
+//paragraphe pour le contenue
         OutlinedTextField(
             value = content,
             onValueChange = { content = it },
@@ -42,6 +43,7 @@ fun AddEditNoteScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {
+            //verifie si les deux paragraphe ne sont pas vide
             if (title.isNotBlank() && content.isNotBlank()) {
                 val newNote = note?.copy(title = title, content = content) ?: Note(title = title, content = content)
                 onSave(newNote)

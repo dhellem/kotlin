@@ -12,10 +12,10 @@ import com.example.application_note.ui.screens.NoteListScreen
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    val viewModel: NoteViewModel = viewModel()
+    val viewModel: NoteViewModel = viewModel()//fournie unec instance
 
-    NavHost(navController, startDestination = "list") {
-        composable("list") {
+    NavHost(navController, startDestination = "list") {//point d'entree et contient tt les ecrans
+        composable("list") {// ecran d'accueil avec tt les notes
             NoteListScreen(
                 viewModel = viewModel,
                 onAddClick = { navController.navigate("add") },
@@ -25,7 +25,7 @@ fun AppNavigation() {
             )
         }
 
-        composable("add") {
+        composable("add") {// ecran d'ajout
             AddEditNoteScreen(
                 onSave = { note ->
                     viewModel.addNote(note.title, note.content)
@@ -34,7 +34,7 @@ fun AppNavigation() {
             )
         }
 
-        composable(
+        composable(// ecran modifier
             "edit/{noteId}",
             arguments = listOf(navArgument("noteId") { type = NavType.IntType })
         ) { backStackEntry ->
