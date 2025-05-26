@@ -22,10 +22,9 @@ import com.example.application_note.ui.theme.White
 import com.example.application_note.ui.theme.Yellow
 import com.example.application_note.ui.theme.Black
 import com.example.application_note.ui.theme.DarkGray
-import com.example.application_note.ui.theme.MediumDarkGray
+import com.example.application_note.ui.theme.MediumDarkGrey
 import com.example.application_note.ui.theme.LightMediumGray
 import androidx.compose.foundation.border
-import com.example.application_note.ui.theme.MediumDarkGrey
 import androidx.compose.ui.text.font.FontWeight
 
 
@@ -46,7 +45,7 @@ fun NoteListScreen(
                 containerColor = Yellow,
                 contentColor = Black
             ) {
-                Text("+",     style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),)
+                Text("+", style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),)
 
             }
         },
@@ -121,7 +120,7 @@ fun NoteItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(4.dp)
-            .border(width = 2.dp, color = Yellow, shape = MaterialTheme.shapes.medium), // BORDURE BLANCHE
+            .border(width = 2.dp, color = LightMediumGray, shape = MaterialTheme.shapes.medium), // BORDURE BLANCHE
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
             containerColor = MediumDarkGrey // Fond gris foncé de la carte
