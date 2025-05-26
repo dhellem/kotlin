@@ -49,50 +49,7 @@ fun AddEditNoteScreen(
                     onValueChange = { title = it },
                     label = {
                         Text(
-                            "Titre",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = Black,
-                            fontWeight = FontWeight.Bold // contenu en gras
-                        )
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = Black,
-                        unfocusedTextColor = Black,
-                        focusedContainerColor = MediumDarkGrey,
-                        unfocusedContainerColor = MediumDarkGrey,
-                        focusedLabelColor = Black,
-                        unfocusedLabelColor = Black,
-                        cursorColor = Black,
-                        focusedBorderColor = Color.Transparent,
-                        unfocusedBorderColor = Color.Transparent
-                    ),
-                    shape = RoundedCornerShape(16.dp),
-                    textStyle = TextStyle(
-                        color = Black,
-                        fontSize = 16.sp,
-                        lineHeight = 24.sp,
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp)
-                )
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MediumDarkGrey, shape = RoundedCornerShape(16.dp))
-                    .border(width = 2.dp, color = LightMediumGray, shape = RoundedCornerShape(16.dp))
-                    .padding(1.dp)
-            ) {
-                OutlinedTextField(
-                    value = content,
-                    onValueChange = { content = it },
-                    label = {
-                        Text(
-                            "Contenu",
+                            "Titre :",
                             style = MaterialTheme.typography.bodyLarge,
                             color = Black,
                             fontWeight = FontWeight.Bold
@@ -112,13 +69,56 @@ fun AddEditNoteScreen(
                     shape = RoundedCornerShape(16.dp),
                     textStyle = TextStyle(
                         color = Black,
-                        fontSize = 16.sp,
-                        lineHeight = 24.sp,
+                        fontSize = 14.sp,
+                        lineHeight = 20.sp,
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 12.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MediumDarkGrey, shape = RoundedCornerShape(16.dp))
+                    .border(width = 2.dp, color = LightMediumGray, shape = RoundedCornerShape(16.dp))
+                    .padding(1.dp)
+            ) {
+                OutlinedTextField(
+                    value = content,
+                    onValueChange = { content = it },
+                    label = {
+                        Text(
+                            "Contenu :",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = Black,
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Black,
+                        unfocusedTextColor = Black,
+                        focusedContainerColor = MediumDarkGrey,
+                        unfocusedContainerColor = MediumDarkGrey,
+                        focusedLabelColor = Black,
+                        unfocusedLabelColor = Black,
+                        cursorColor = Black,
+                        focusedBorderColor = Color.Transparent,
+                        unfocusedBorderColor = Color.Transparent
+                    ),
+                    shape = RoundedCornerShape(16.dp),
+                    textStyle = TextStyle(
+                        color = Black,
+                        fontSize = 14.sp,
+                        lineHeight = 20.sp,
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(150.dp)
-                        .padding(vertical = 8.dp)
+                        .padding(vertical = 12.dp)
                 )
             }
 

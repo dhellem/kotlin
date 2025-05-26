@@ -49,14 +49,14 @@ fun NoteListScreen(
 
             }
         },
-        containerColor = DarkGray // <-- Fond général noir ici
+        containerColor = DarkGray
     ) { paddingValues ->
 
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
-                .background (DarkGray) // Assure que la colonne a aussi un fond noir
+                .background (DarkGray)
         ) {
             Box(
                 modifier = Modifier
@@ -123,7 +123,7 @@ fun NoteItem(
             .border(width = 2.dp, color = LightMediumGray, shape = MaterialTheme.shapes.medium), // BORDURE BLANCHE
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MediumDarkGrey // Fond gris foncé de la carte
+            containerColor = MediumDarkGrey
         )
     ) {
         Row(
