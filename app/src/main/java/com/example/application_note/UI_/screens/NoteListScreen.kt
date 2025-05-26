@@ -121,7 +121,7 @@ fun NoteItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(4.dp)
-            .border(width = 2.dp, color = DarkGray, shape = MaterialTheme.shapes.medium), // BORDURE BLANCHE
+            .border(width = 2.dp, color = Yellow, shape = MaterialTheme.shapes.medium), // BORDURE BLANCHE
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
             containerColor = MediumDarkGrey // Fond gris foncé de la carte

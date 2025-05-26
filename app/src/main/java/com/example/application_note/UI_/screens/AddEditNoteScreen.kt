@@ -1,55 +1,112 @@
 package com.example.application_note.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.application_note.data.Note
+import com.example.application_note.ui.theme.Black
+import com.example.application_note.ui.theme.DarkGray
+import com.example.application_note.ui.theme.MediumDarkGray
+import com.example.application_note.ui.theme.Yellow
 
 @Composable
 fun AddEditNoteScreen(
-    note: Note? = null,// si il n'y a pas de note on est en mode "ajout" sinon en mode "modifier"
-    onSave: (Note) -> Unit//callback
+    note: Note? = null,
+    onSave: (Note) -> Unit
 ) {
-    //declare deux etats locaux avec des valeur initial ou non en fonction du mode
     var title by remember { mutableStateOf(note?.title ?: "") }
     var content by remember { mutableStateOf(note?.content ?: "") }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = DarkGray
     ) {
-//paragraphe pour le titre
-        OutlinedTextField(
-            value = title,
-            onValueChange = { title = it },
-            label = { Text("Titre") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-//paragraphe pour le contenue
-        OutlinedTextField(
-            value = content,
-            onValueChange = { content = it },
-            label = { Text("Contenu") },
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(150.dp)
-        )
+                .fillMaxSize()
+                .padding(16.dp)
+                .background(DarkGray)
+        ) {
+            OutlinedTextField(
+                value = title,
+                onValueChange = { title = it },
+                label = {
+                    Text(
+                        "Titre",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = Black
+                    )
+                },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = Black,
+                    unfocusedTextColor = Black,
+                    focusedContainerColor = MediumDarkGray,
+                    unfocusedContainerColor = MediumDarkGray,
+                    focusedLabelColor = Black,
+                    unfocusedLabelColor = Black,
+                    cursorColor = Black,
+                    focusedBorderColor = Black,
+                    unfocusedBorderColor = Yellow
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 30.dp)
+                    .background(MediumDarkGray)
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Button(onClick = {
-            //verifie si les deux paragraphe ne sont pas vide
-            if (title.isNotBlank() && content.isNotBlank()) {
-                val newNote = note?.copy(title = title, content = content) ?: Note(title = title, content = content)
-                onSave(newNote)
+            OutlinedTextField(
+                value = content,
+                onValueChange = { content = it },
+                label = {
+                    Text(
+                        "Contenu",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = Black
+                    )
+                },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = Black,
+                    unfocusedTextColor = Black,
+                    focusedContainerColor = MediumDarkGray,
+                    unfocusedContainerColor = MediumDarkGray,
+                    focusedLabelColor = Black,
+                    unfocusedLabelColor = Black,
+                    cursorColor = Black,
+                    focusedBorderColor = Black,
+                    unfocusedBorderColor = Yellow
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
+                    .background(MediumDarkGray)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = {
+                    if (title.isNotBlank() && content.isNotBlank()) {
+                        val newNote = note?.copy(title = title, content = content)
+                            ?: Note(title = title, content = content)
+                        onSave(newNote)
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Yellow,
+                    contentColor = Black,
+                )
+            ) {
+                Text(
+                    text = "Enregistrer",
+                    fontWeight = FontWeight.Bold
+                )
             }
-        }) {
-            Text("Enregistrer")
         }
     }
 }
